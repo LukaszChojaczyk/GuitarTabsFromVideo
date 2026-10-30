@@ -18,13 +18,27 @@ You also get a plain-text tab and a MIDI file of the detected notes.
 
 ## Setup (Windows)
 
-```
-winget install Python.Python.3.11
-winget install Gyan.FFmpeg
-```
+1. Install Python 3.11, ffmpeg and Git (skip any you already have):
 
-Then double-click **`Guitar Tabber.bat`**. The first run creates a virtual environment in
-`%LOCALAPPDATA%\guitar-tab-venv` and installs the requirements (about 3 GB, mostly PyTorch).
+   ```
+   winget install Python.Python.3.11
+   winget install Gyan.FFmpeg
+   winget install Git.Git
+   ```
+
+   Open a new terminal afterwards so the new programs are on your PATH.
+
+2. Clone the repo:
+
+   ```
+   git clone https://github.com/LukaszChojaczyk/GuitarTabsFromVideo.git
+   ```
+
+3. Double-click **`Guitar Tabber.bat`** in the cloned folder. The first run creates a virtual
+   environment in `%LOCALAPPDATA%\guitar-tab-venv` and installs the requirements (about 3 GB,
+   mostly PyTorch), so it takes a while. Later runs start right away.
+
+Generated PDFs are not saved in the repo. Use **Save PDF...** in the app to keep a copy wherever you like.
 
 Manual setup on any OS:
 
