@@ -1,0 +1,8 @@
+--extra-index-url https://download.pytorch.org/whl/cpu
+torch
+torchaudio
+demucs
+basic-pitch[onnx]
+soundfile
+reportlab
+yt-dlp
