@@ -224,7 +224,7 @@ class App(tk.Tk):
             shutil.copyfile(self.result.mid_path, path)
 
 
-REQUIRED_MODULES = ("yt_dlp", "demucs", "basic_pitch", "librosa", "reportlab")
+REQUIRED_MODULES = ("yt_dlp", "demucs", "basic_pitch", "librosa", "reportlab", "pkg_resources")
 VENV_SCRIPTS = os.path.join(os.environ.get("LOCALAPPDATA", ""), "guitar-tab-venv", "Scripts")
 
 

@@ -6,3 +6,5 @@ basic-pitch[onnx]
 soundfile
 reportlab
 yt-dlp
+# resampy (used by basic-pitch) imports pkg_resources, which setuptools 81+ removed
+setuptools<81
