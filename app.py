@@ -224,7 +224,36 @@ class App(tk.Tk):
             shutil.copyfile(self.result.mid_path, path)
 
 
+REQUIRED_MODULES = ("yt_dlp", "demucs", "basic_pitch", "librosa", "reportlab")
+VENV_SCRIPTS = os.path.join(os.environ.get("LOCALAPPDATA", ""), "guitar-tab-venv", "Scripts")
+
+
+def ensure_environment():
+    """If started with a Python that lacks the app's packages (e.g. by
+    double-clicking app.py), relaunch in the app's own environment, or say
+    how to create it instead of failing halfway through a run."""
+    import importlib.util
+    missing = [m for m in REQUIRED_MODULES if importlib.util.find_spec(m) is None]
+    if not missing:
+        return
+    venv_python = os.path.join(VENV_SCRIPTS, "pythonw.exe")
+    if os.path.exists(venv_python) and not os.environ.get("GUITAR_TABBER_RELAUNCHED"):
+        import subprocess
+        subprocess.Popen([venv_python, os.path.abspath(__file__)],
+                         env={**os.environ, "GUITAR_TABBER_RELAUNCHED": "1"})
+        sys.exit(0)
+    root = tk.Tk()
+    root.withdraw()
+    messagebox.showerror(
+        "Guitar Tabber",
+        "Guitar Tabber's Python packages are not installed (missing: " + ", ".join(missing) + ").\n\n"
+        "Start the app with 'Guitar Tabber.bat' instead of app.py. It installs everything "
+        "on its first run.")
+    sys.exit(1)
+
+
 if __name__ == "__main__":
+    ensure_environment()
     if sys.platform == "win32":
         try:
             import ctypes
