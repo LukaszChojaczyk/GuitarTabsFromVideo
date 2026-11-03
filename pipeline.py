@@ -88,7 +88,8 @@ def find_ffmpeg():
 
 
 def _job_dir(key, opts):
-    raw = f"{key}|{opts.start}|{opts.end}"
+    end = float(opts.end) if opts.end is not None else None
+    raw = f"{key}|{float(opts.start)}|{end}"
     safe = re.sub(r"[^\w-]", "_", key)[:40]
     path = os.path.join(WORK_ROOT, f"{safe}_{hashlib.sha1(raw.encode()).hexdigest()[:8]}")
     os.makedirs(path, exist_ok=True)
